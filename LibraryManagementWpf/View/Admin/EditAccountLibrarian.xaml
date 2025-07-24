@@ -1,0 +1,89 @@
+﻿<Window x:Class="LibraryManagementWpf.View.Admin.EditAccountLibrarian"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:LibraryManagementWpf.View.Admin"
+        xmlns:local="clr-namespace:LibraryManagementWpf.ViewModel.Admin"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="EditAccountLibrarian" 
+               Height="380" Width="520"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="ToolWindow" DataContext="{StaticResource LibAccVM}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <local:EditAccountParameterConverter x:Key="EditAccountParameterConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Theme/DefaultTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Border Padding="20" Background="#ffffff" MouseDown="Border_MouseDown">
+        <Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="Cập nhật tài khoản" HorizontalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+                <TextBlock Grid.Row="2" Text="Full Name" Style="{StaticResource text}"/>
+                <TextBlock Grid.Row="4" Text="Role" Style="{StaticResource text}"/>
+                <TextBlock Grid.Row="6" Text="Phone" Style="{StaticResource text}"/>
+                <uc:TextBox x:Name="Fullname" Grid.Column="1" Grid.Row="2" Hint="{Binding Fullname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                </uc:TextBox>
+                <TextBlock Grid.Column="1" Grid.Row="3" Foreground="Red" FontSize="15" 
+                     Text="{Binding FullnameError}" />
+                <TextBlock x:Name="UserId" Visibility="Hidden" Grid.Column="1" Grid.Row="5" Foreground="Red" FontSize="15" 
+                    Text="{Binding UserId}"/>
+                <ComboBox Grid.Column="1" Grid.Row="4"
+                    ItemsSource="{Binding ListRole}"
+                    DisplayMemberPath="Name" 
+                    SelectedValuePath="Name"
+                    SelectedValue="{Binding Role}"
+                    IsEditable="False"
+                    Margin="0,0,0,5" Width="355" x:Name="Role"/>
+
+                    <TextBlock Grid.Column="1" Grid.Row="5" Foreground="Red" FontSize="15" 
+                    Text="{Binding RoleError}" />
+
+                <uc:TextBox x:Name="Phone" Grid.Column="1" Grid.Row="6" Hint="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Grid.Column="1" Grid.Row="7" Foreground="Red" FontSize="15" 
+                Text="{Binding PhoneError}" />
+
+
+                <Grid Grid.Column="1" Grid.Row="8" Margin="0 5 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button DataContext="{StaticResource LibAccVM}" Command="{Binding CancelEditAccountLibrarianViewCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Thoát" Margin="0 0 10 0" Style="{StaticResource buttonMain}"/>
+                    <Button DataContext="{StaticResource LibAccVM}" Command="{Binding DoEditCommand}" Content="Lưu" Margin="10 0 0 0" Grid.Column="1" Style="{StaticResource buttonMainGreen}">
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource EditAccountParameterConverter}">
+                                <Binding ElementName="UserId" Path="Text"/>
+                                <Binding ElementName="Fullname" Path="Hint"/>
+                                <Binding ElementName="Phone" Path="Hint"/>
+                                <Binding ElementName="Role" Path="SelectedValue"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LibraryManagementWpf": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

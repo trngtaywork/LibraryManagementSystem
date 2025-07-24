@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="LibraryManagementWpf.View.Librarian.BookManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:LibraryManagementWpf.View.Librarian" 
+        mc:Ignorable="d"
+             d:DesignHeight="720" d:DesignWidth="1080" DataContext="{StaticResource bookLibVM}">
+
+    <UserControl.Resources>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
+
+    <Border Background="#eff2f7">
+        <Grid Margin="30 20 20 20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--Search TextBox-->
+            <Grid Margin="40,20,150,0" Width="300" Grid.Row="1" HorizontalAlignment="Right">
+                    <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}" Margin="0,0,30,0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Panel.ZIndex="1" Text="Search here ..." 
+                   Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" 
+                                   Margin="20,0,0,0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"/>
+
+                <Button Style="{x:Null}" Cursor="Hand"
+                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                    Width="30" Height="30" Margin="0,0,35,0" Background="Transparent" BorderBrush="Transparent">        
+                    <Icon:PackIconMaterial Kind="Magnify"
+                      Foreground="#b0b9c6" Margin="0 0 0 0"/>
+                </Button>
+                </Grid>
+
+            <TextBlock Text="Quản lý sách" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                           HorizontalAlignment="Left" Foreground="#121518"/>
+
+            <!-- Add Button-->
+            <Button Command="{Binding AddNewBookViewCommand}" Name="btnAddNewBook" Style="{StaticResource addButton}">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
+                    <TextBlock Text="Thêm mới sách"></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Separator Height="1" Grid.Row="2" Background="#dae2ea" Margin="0 1 0 10"/>
+
+            <!---Counter Title-->
+            <TextBlock Text="Số lượng sách: " Grid.Row="3" FontSize="18" FontWeight="SemiBold" Foreground="#121578" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+            <!--- Counter Value -->
+            <TextBlock Text="{Binding BookCount}" Grid.Row="3" FontSize="18" FontWeight="SemiBold" Foreground="#121578" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="155,0,0,0" />
+
+            <TextBlock Text="Thể loại" Grid.Row="3" FontSize="13" Margin="0 0 515 0" FontWeight="SemiBold" Foreground="#121578" HorizontalAlignment="Right" VerticalAlignment="Center">
+            </TextBlock>
+
+            <!---ComboBox Category-->
+            <ComboBox Grid.Row="3" Name="cbCategory" Width="200" HorizontalAlignment="Right" Margin="0 5 300 5" 
+                      DisplayMemberPath="CategoryName" SelectedValuePath="CategoryId"
+                      ItemsSource="{Binding Categories}" 
+                      SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+            </ComboBox>
+
+
+            <TextBlock Text="Sắp xếp" Grid.Row="3" FontSize="13" Margin="0 0 215 0" FontWeight="SemiBold" Foreground="#121578" HorizontalAlignment="Right" VerticalAlignment="Center">
+            </TextBlock>
+
+            <!---ComboBox Sort-->
+            <ComboBox Grid.Row="3" Name="cbSortOptions" Width="200" HorizontalAlignment="Right" Margin="0 5 0 5" 
+                      ItemsSource="{Binding SortOptions}" SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}">
+            </ComboBox>
+
+            <!-- Book List -->
+            <DataGrid Name="dgBooks" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+          ItemsSource="{Binding Books}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã sách" Binding="{Binding BookId}" Width="*"/>
+                    <DataGridTextColumn Header="Tiêu đề" Binding="{Binding Title}" Width="*"/>
+                    <DataGridTextColumn Header="Tác giả" Binding="{Binding AuthorNames}" Width="*"/>
+                    <DataGridTextColumn Header="Thể loại" Binding="{Binding CategoryName}" Width="*"/>
+                    <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="*"/>
+                    <DataGridTextColumn Header="Ngày phát hành" Binding="{Binding PublicationDate}" Width="*"/>
+                    <DataGridTextColumn Header="Ngày tạo" Binding="{Binding CreatedAt}" Width="*"/>
+                    <DataGridTextColumn Header="Người tạo" Binding="{Binding CreatedBy}" Width="*"/>
+                    <DataGridTextColumn Visibility="Hidden" Header="Category Id" Binding="{Binding CategoryId}" Width="*"/>
+
+                    <DataGridTemplateColumn Header="Ảnh bìa" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Image}" Width="50" Height="50"/>
+                                </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Actions" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                    <Button Command="{Binding DataContext.EditBookViewCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                CommandParameter="{Binding}" 
+                                Width="20" Margin="6" 
+                                Background="#4CAF50" Foreground="White">
+                                            <Icon:PackIconMaterial Kind="Pencil" />
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+</UserControl>

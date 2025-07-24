@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="LibraryManagementWpf.View.Common.OTPForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        d:DesignHeight="720" d:DesignWidth="1080">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Theme/DefaultTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Image Source="/Images/logoFPT.png" Height="150" Margin="-50,0,0 500"/>
+        <Border Width="300" VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="#E2E9E9" BorderThickness="2" CornerRadius="10"
+                Padding="30" Background="White">
+            <StackPanel>
+                <!-- OTP -->
+                <TextBlock Foreground="#5a5a5a" FontWeight="SemiBold" FontSize="16" Margin="0 0 0 10" Text="Enter OTP"/>
+
+                <!-- Input -->
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="71*"/>
+                        <ColumnDefinition Width="165*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Visibility="{Binding ElementName=txtOTP, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" 
+                               Margin="35,0,5,0" VerticalAlignment="Center" Foreground="#bdbdbd" Panel.ZIndex="1" 
+                               IsHitTestVisible="False" Text="Enter OTP" Grid.ColumnSpan="2"/>
+                    <TextBox Style="{StaticResource field}"  x:Name="txtOTP" Text="{Binding OTP}" MaxLength="6" Grid.ColumnSpan="2"/>
+                    <Icon:PackIconMaterial Kind="Key" Width="15" Foreground="#c7c7c7" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </Grid>
+                <Grid Visibility="Collapsed">
+                    <TextBlock Visibility="{Binding ElementName=txtEmail, Path=Text.IsEmpty,Converter={StaticResource BoolToVis}}" 
+                        Margin="35 0 5 0" VerticalAlignment="Center" Foreground="#bdbdbd" Panel.ZIndex="1" 
+                        IsHitTestVisible="False" Text="Enter Email"/>
+                    <TextBox Style="{StaticResource field}"  x:Name="txtEmail"  Text="{Binding Email}"/>
+                    <Icon:PackIconMaterial Kind="EmailVariant" Width="15" Foreground="#c7c7c7" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                </Grid>
+                <TextBlock Foreground="Red" Text="{Binding errorOTP}"/>
+
+                <TextBlock Foreground="Red" FontSize="12" Margin="10" Text="{Binding Countdown}" HorizontalAlignment="Center"/>
+                <Button Content="Resend OTP" Command="{Binding ResendOTPCommand}" Style="{StaticResource buttonMainGreen}" Foreground="White" HorizontalAlignment="Center"/>
+
+                <Grid Margin="0 0 43 0">
+                    <Button IsDefault="True" Command="{Binding SubmitOTPCommand}" Content="Submit OTP" Style="{StaticResource addButton}" BorderBrush="#623ed0" Background="#623ed0" Foreground="#FFFFFF"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

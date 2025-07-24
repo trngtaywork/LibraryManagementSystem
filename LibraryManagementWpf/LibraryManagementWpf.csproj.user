@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="View\Admin\AccountManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\AccountStudentManagent.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\AddNewLibrarianAccount.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\AddNewStudentAccount.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\AdminMainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Borrow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\CreatePost.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\Dashboard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\DocumentaryManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\EditAccountLibrarian.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\EditAccountStudent.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\InfoCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\PostView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Admin\TextBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Common\ForgotPasswordForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Common\Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Common\OTPForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Common\Authen.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Common\RegisterForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Dialogs\CustomDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Dialogs\CustomDialogShowData.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\AddCategory.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\AddNewBook.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\AddNewBorrow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\CategoryManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\DashboardLibrarian.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\EditBook.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\EditCategory.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\FineManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\LibMainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\Report.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Librarian\ReportDetails.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Student\ReportBorrowedBook.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Student\ReportFine.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Student\ReportList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Student\StudentFinesHistory.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Student\Notification.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Student\StudentMainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Student\UpdateProfile.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme\DefaultTemplate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\AccountManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\AccountStudentManagent.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\AddNewLibrarianAccount.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\AddNewStudentAccount.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\AdminMainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Borrow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\CreatePost.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\Dashboard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\DocumentaryManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\EditAccountLibrarian.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\EditAccountStudent.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\InfoCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\PostView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Admin\TextBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Common\ForgotPasswordForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Common\Login.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Common\OTPForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Common\Authen.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Common\RegisterForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Dialogs\CustomDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Dialogs\CustomDialogShowData.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\AddCategory.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\AddNewBook.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\AddNewBorrow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\CategoryManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\DashboardLibrarian.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\EditBook.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\EditCategory.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\FineManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\LibMainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\Report.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Librarian\ReportDetails.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Student\Notification.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Student\ReportBorrowedBook.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Student\ReportFine.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Student\ReportList.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Student\StudentFinesHistory.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Student\StudentMainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Student\UpdateProfile.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

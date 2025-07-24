@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="LibraryManagementWpf.View.Librarian.IssuedHistory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:LibraryManagementWpf.View.Librarian" 
+        mc:Ignorable="d"
+        d:DesignHeight="720" d:DesignWidth="1080" DataContext="{StaticResource issueLibVM}" Loaded="UserControl_Loaded">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <local:StatusToVisibilityConverter x:Key="StatusToVisibilityConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Theme/DefaultTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border Background="#eff2f7">
+        <Grid Margin="30 20 20 20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--Search TextBox-->
+            <Grid Margin="40,20,-30,0" Width="300" Grid.Row="1" HorizontalAlignment="Right">
+                <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}" Margin="0,0,30,0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <TextBlock Panel.ZIndex="1" Text="Search here ..." 
+                   Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" 
+                               Margin="20,0,0,0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"/>
+
+                <Button Style="{x:Null}" Cursor="Hand"
+                   VerticalAlignment="Center" HorizontalAlignment="Right"
+                   Width="30" Height="30" Margin="0,0,35,0" Background="Transparent" BorderBrush="Transparent">
+                    <Icon:PackIconMaterial Kind="Magnify"
+                    Foreground="#b0b9c6" Margin="0 0 0 0"/>
+                </Button>
+            </Grid>
+
+            <TextBlock Text="Issued History" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                       HorizontalAlignment="Left" Foreground="#121518"/>
+
+            <!---Counter Title-->
+            <TextBlock Text="Number of Issue: " Grid.Row="3" FontSize="18" FontWeight="SemiBold" Foreground="#121578" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+            <!--- Counter Value -->
+            <TextBlock Text="{Binding IssueCount}" Grid.Row="3" FontSize="18" FontWeight="SemiBold" Foreground="#121578" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="175,0,0,0" />
+
+            <TextBlock Text="Trạng thái" Grid.Row="3" FontSize="13" Margin="0 0 515 0" FontWeight="SemiBold" Foreground="#121578" HorizontalAlignment="Right" VerticalAlignment="Center">
+            </TextBlock>
+
+            <!---ComboBox Status-->
+            <ComboBox Grid.Row="3" Name="cbBorrowStatus" Width="200" HorizontalAlignment="Right" Margin="0 5 300 5" 
+                      ItemsSource="{Binding StatusOptions}" SelectedItem="{Binding SelectedBorrowStatus, Mode=TwoWay}">
+            </ComboBox>
+
+            <TextBlock Text="Sắp xếp" Grid.Row="3" FontSize="13" Margin="0 0 215 0" FontWeight="SemiBold" Foreground="#121578" HorizontalAlignment="Right" VerticalAlignment="Center">
+            </TextBlock>
+
+            <!---ComboBox Sort-->
+            <ComboBox Grid.Row="3" Name="cbSortOptions" Width="200" HorizontalAlignment="Right" Margin="0 5 0 5" 
+                      ItemsSource="{Binding SortOptions}" SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}">
+            </ComboBox>
+
+            <DataGrid Name="dgIssuedHistory" Grid.Row="4" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" 
+                  ItemsSource="{Binding BorrowBooks}" 
+                  HorizontalAlignment="Stretch" 
+                  VerticalAlignment="Stretch">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="Returned">
+                                <Setter Property="Background" Value="LightGreen"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="Canceled">
+                                <Setter Property="Background" Value="LightCoral"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Borrow ID" Binding="{Binding BorrowId}" Width="*" />
+                    <DataGridTextColumn Header="Student Code" Binding="{Binding StudentCode}" Width="*" />
+                    <DataGridTextColumn Header="Borrower Name" Binding="{Binding BorrowerName}" Width="*" />
+                    <DataGridTextColumn Header="Book Title" Binding="{Binding BookTitle}" Width="*" />
+                    <DataGridTextColumn Header="Reservation Date" Binding="{Binding ReservationDate, StringFormat='dd/MM/yyyy'}" Width="*" />
+                    <DataGridTextColumn Header="Borrow Date" Binding="{Binding BorrowDate, StringFormat='dd/MM/yyyy'}" Width="*" />
+                    <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat='dd/MM/yyyy'}" Width="*" />
+                    <DataGridTextColumn Header="Return Date" Binding="{Binding ReturnDate, StringFormat='dd/MM/yyyy'}" Width="*" />
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+</UserControl>

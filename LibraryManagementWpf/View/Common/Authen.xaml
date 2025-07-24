@@ -1,0 +1,57 @@
+﻿<Window x:Class="LibraryManagementWpf.View.Common.Authen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="AuthenWindow" Height="720" Width="1080" WindowState="Maximized" WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow" AllowsTransparency="False" Background="Transparent" DataContext="{StaticResource AuthenVM}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Theme/DefaultTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Top Section-->
+        <Border BorderThickness="0 0 0 2" BorderBrush="#E2E9E9" Background="White" Padding="10" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <Grid>
+                <Icon:PackIconMaterial Kind="Microsoft" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#623ed0"/>
+            </Grid>
+        </Border>
+
+        <!--Middle Section-->
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <SolidColorBrush Color="WhiteSmoke"></SolidColorBrush>
+            </Grid.Background>
+
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Images/thuvienfpt.jpeg" Opacity="0.5"></ImageBrush>
+                </Grid.Background>
+            </Grid>
+            <ContentControl Content="{Binding CurrentView}"/>    
+
+        </Grid>
+
+
+        <!--Bottom Section-->
+        <Border Grid.Row="2" BorderThickness="0 2 0 0" BorderBrush="#E2E2E9" CornerRadius="0 0 5 5" Padding="10" Background="White">
+            <Grid>
+                <!--Coyyright Text-->
+                <TextBlock  Margin="15 0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="13" Foreground="#909090" Text="Copyright © 2024. All right reserved."/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

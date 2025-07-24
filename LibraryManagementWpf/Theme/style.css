@@ -1,0 +1,96 @@
+﻿
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+}
+
+.post-form {
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="file"], .ck-editor__editable_inline {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.ck-editor__editable_inline {
+    height: 300px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    .btn:hover {
+        background-color: #218838;
+    }
+
+.post-list {
+    margin-top: 40px;
+}
+
+.post-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+    .post-item:last-child {
+        border-bottom: none;
+    }
+
+.post-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.post-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.post-actions .btn {
+    background-color: #007bff;
+}
+
+.post-actions .btn-delete {
+    background-color: #dc3545;
+}
+

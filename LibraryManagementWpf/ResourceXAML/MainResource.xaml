@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    
+                    xmlns:viewmodel="clr-namespace:LibraryManagementWpf.ViewModel.Admin"
+                    xmlns:authenviewmodel="clr-namespace:LibraryManagementWpf.ViewModel.Common"
+                    xmlns:librarianviewmodel="clr-namespace:LibraryManagementWpf.ViewModel.Librarian"
+                    xmlns:studentviewmodel="clr-namespace:LibraryManagementWpf.ViewModel.Student"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <viewmodel:MainViewModel x:Key="AdminVM"></viewmodel:MainViewModel>
+    <viewmodel:PostViewModel x:Key="PostVM"></viewmodel:PostViewModel>
+    <viewmodel:AccountLibViewModel x:Key="LibAccVM"></viewmodel:AccountLibViewModel>
+    <viewmodel:AccountStudentViewModel x:Key="StuAccVM"></viewmodel:AccountStudentViewModel>
+    <viewmodel:DashboardViewModel x:Key="adminDashboardVM"></viewmodel:DashboardViewModel>
+    <viewmodel:CategoryManagementViewModel x:Key="cateAdminVM"></viewmodel:CategoryManagementViewModel>
+    <viewmodel:DocumentaryViewModel x:Key="docAdminVM"></viewmodel:DocumentaryViewModel>
+
+    <authenviewmodel:AuthenViewModel x:Key="AuthenVM"></authenviewmodel:AuthenViewModel>
+
+    <librarianviewmodel:MainViewModel x:Key="LibrarianVM"></librarianviewmodel:MainViewModel>
+    <librarianviewmodel:BookManagementViewModel x:Key="bookLibVM"></librarianviewmodel:BookManagementViewModel>
+    <librarianviewmodel:BorrowManagementViewModel x:Key="borrowLibVM"></librarianviewmodel:BorrowManagementViewModel>
+    <librarianviewmodel:IssuedHistoryViewModel x:Key="issueLibVM"></librarianviewmodel:IssuedHistoryViewModel>
+    <librarianviewmodel:ReportLibViewModel x:Key="reportLibVM"></librarianviewmodel:ReportLibViewModel>
+    <librarianviewmodel:CategoryManagementViewModel x:Key="cateLibVM"></librarianviewmodel:CategoryManagementViewModel>
+
+
+    <studentviewmodel:MainViewModel x:Key="StudentVM"></studentviewmodel:MainViewModel>
+    <studentviewmodel:NotifyViewModel x:Key="NotifyVM"></studentviewmodel:NotifyViewModel>
+
+</ResourceDictionary>

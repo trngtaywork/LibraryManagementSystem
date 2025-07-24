@@ -1,0 +1,154 @@
+﻿<UserControl x:Class="LibraryManagementWpf.View.Admin.AccountStudentManagent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:LibraryManagementWpf.View.Admin"
+             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Classic"
+             mc:Ignorable="d"
+             d:DesignHeight="720" d:DesignWidth="800"
+             DataContext="{StaticResource StuAccVM}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Theme/DefaultTemplate.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Border Background="#eff2f7">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+           
+
+            <!--Search TextBox-->
+            <Grid Margin="40,0,0,0" Width="300" Grid.Row="4" HorizontalAlignment="Right">
+                <TextBox x:Name="txtSearch" Style="{StaticResource textboxSearch}" Margin="0,0,30,0" Text="{Binding Keyword}"/>
+
+                <TextBlock Panel.ZIndex="1" Text="Search here ..." 
+                   Visibility="{Binding ElementName=txtSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" 
+                           Margin="20,0,0,0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"/>
+
+                <Button Command="{Binding SearchCommand}" Style="{x:Null}" Cursor="Hand"
+                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                    Width="30" Height="30" Margin="0,0,35,0" Background="Transparent" BorderBrush="Transparent">
+                    <Icon:PackIconMaterial Kind="Magnify"
+                   Foreground="#b0b9c6" Margin="0 0 0 0"/>
+                </Button>
+            </Grid>
+
+            <TextBlock Text="Quản lý tài khoản" Grid.Row="1" FontSize="32" FontWeight="SemiBold" Margin="0 20 0 0"
+                       HorizontalAlignment="Left" Foreground="#121518"/>
+
+            <!-- Add Button-->
+            <Button DataContext="{StaticResource AdminVM}" Command="{Binding AddNewAccountStudentViewCommand}" Style="{StaticResource addButton}" Margin="0 20 20 0">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="Plus" VerticalAlignment="Center" Width="11" Height="11" Margin="0 1 8 0"/>
+                    <TextBlock Text="Thêm mới"></TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Separator Height="1" Grid.Row="3" Background="#dae2ea" Margin="0 1 0 10"/>
+
+            <!--Tab Button-->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0 10 0 0">
+                <Button DataContext="{StaticResource AdminVM}" Command="{Binding AccountLibViewCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Content="Librarian" Style="{StaticResource tabButton}"></Button>
+                <Button Content="Student" Style="{StaticResource tabButton}" BorderBrush="#784ff2"></Button>
+            </StackPanel>
+
+            <!--Counter Title-->
+            <TextBlock Text="{Binding DisplayTotalPage}" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Foreground="#121578" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBlock Text="Sort by" Grid.Row="4" FontSize="13" Margin="0 0 200 0" FontWeight="SemiBold" Foreground="#121578" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <!--Filter ComboBox-->
+            <Grid Width="150" HorizontalAlignment="Center" Grid.Row="4">
+                <ComboBox x:Name="txtFilter"
+                     VerticalAlignment="Center" Margin="0 5" 
+                     Style="{StaticResource ComboBoxFlatStyle}"
+                     SelectedValue="{Binding SelectedFilterOption, Mode=TwoWay}">
+                    <ComboBox.ItemsSource>
+                        <x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                            <sys:String>All</sys:String>
+                            <sys:String>Tên</sys:String>
+                            <sys:String>Email</sys:String>
+                            <sys:String>Mã sinh viên</sys:String>
+                        </x:Array>
+                    </ComboBox.ItemsSource>
+                </ComboBox>
+            </Grid>
+
+            <!--DataGrid View-->
+            <DataGrid ItemsSource="{Binding DisplayedListStudentPerPage}" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" x:Name="dataGrid">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding UserId}"/>
+                    <DataGridTextColumn Header="Tên" IsReadOnly="True" Width="*" Binding="{Binding Fullname}"></DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Mã sinh viên" IsReadOnly="True" Width="*" Binding="{Binding StudentCode}"/>
+                    <DataGridTextColumn Header="Email" IsReadOnly="True" Width="200" Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="Số điện thoại" IsReadOnly="True" Width="*" Binding="{Binding Phone}"/>
+
+                    <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button CommandParameter="{Binding}" 
+                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                            Style="{StaticResource gridEditButton}">
+                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                    <Button Style="{StaticResource gridRemoveButton}" 
+                                         Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                         CommandParameter="{Binding}" Margin="5 0 0 0"> 
+                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Pagination Section -->
+            <Border CornerRadius="5" Padding="5" Background="White" Margin="0 10 10 10" Grid.Row="6" HorizontalAlignment="Right" BorderBrush="#dee4ec" BorderThickness="1">
+                <StackPanel Orientation="Horizontal">
+                    <!-- Previous Page Button -->
+                    <Button Style="{StaticResource paginButton}" 
+                         Command="{Binding PreviousPageCommand}" 
+                         IsEnabled="{Binding IsPreviousPageEnabled}">   
+                        <Icon:PackIconMaterial Kind="ChevronLeft" Style="{StaticResource paginButtonIcon}"/>
+                    </Button>
+
+                    <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
+                    <Button Style="{StaticResource paginButton}"  Background="#7950f2" Foreground="#ffffff">
+                        <TextBlock>
+                            <Run Text="{Binding CurrentPage}" />
+                            <Run Text="/" />
+                            <Run Text="{Binding TotalPages, Mode=OneWay}" />
+                        </TextBlock>
+                    </Button>
+
+                    <Rectangle Width="1" Fill="#dee4ec" Margin="3 7"/>
+
+                    <!-- Next Page Button -->
+                    <Button Style="{StaticResource paginButton}" 
+                         Command="{Binding NextPageCommand}" 
+                         IsEnabled="{Binding IsNextPageEnabled}">   
+                        <Icon:PackIconMaterial Kind="ChevronRight" Style="{StaticResource paginButtonIcon}"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

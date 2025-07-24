@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CKEditor 5 - CKFinder Integration</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
+    <script src="https://ckeditor.com/apps/ckfinder/3.5.1/ckfinder.js"></script>
+    <link rel="stylesheet" href="../../Theme/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="post-form">
+            <div class="form-group" style="display:none">
+                <input type="text" id="post-id">
+            </div>
+            <div class="form-group">
+                <label for="post-title">Tiêu đề bài viết</label>
+                <input type="text" id="post-title" placeholder="Nhập tiêu đề bài viết...">
+            </div>
+            <div style="color: red;" id="errorTitle" name="error"></div>
+            <div class="form-group">
+                <label for="post-content">Nội dung bài viết</label>
+                <textarea id="editor"></textarea>
+            </div>
+            <div style="color: red;" id="errorContent" name="error"></div>
+        </div>
+    </div>
+    <script>
+        let contentEditor;
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                placeholder: "This is the editor content.",
+                ckfinder: {
+                    uploadUrl: '/ckfinder/core/connector/aspx?command=QuickUpload&type=Files&responseType=json'
+                },
+                toolbar: [
+                    'undo', 'redo', '|', 'heading', '|', 'bold', 'italic', '|',
+                    'ckfinder', "mediaEmbed", '|',
+                    'insertTable', 'tableColumn', 'tableRow', 'mergeTableCells'
+                ],
+                mediaEmbed: { previewsInData: true }
+            })
+            .then(editor => {
+                contentEditor = editor;
+                console.log(contentEditor);
+            })
+            .catch(error => {
+                console.error(error.stack);
+            });
+    </script>
+</body>
+</html>
